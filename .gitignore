@@ -47,3 +47,5 @@ vignettes/*.pdf
 # R Project file
 UMS-CES.Rproj
 
+# Knitted Repot
+*.html
