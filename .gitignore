@@ -39,3 +39,10 @@ vignettes/*.pdf
 .Renviron
 
 *.csv
+
+# Data files
+/data  
+
+# R Project file
+UMS-CES.Rproj
+
