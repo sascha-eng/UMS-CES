@@ -11,7 +11,7 @@ View(ess)
 library(tidyverse) # Load the tidyverse package
 
 ess_1 <- ess %>% 
-  select(idno, vote, polintr, gndr, agea, domicil, cntry, ctzcntr) %>%  # select variables
+  select(idno, vote, polintr, gndr, agea, domicil, region, eisced, cntry, ctzcntr) %>%  # select variables
   filter(cntry == "CH") %>%  # restrict sample to Switzerland
   filter(ctzcntr == 1) %>% # restrict sample to Swiss citizens 
   filter(vote %in% c(1,2)) %>%  # restrict to "yes" and "no" votes
@@ -27,7 +27,23 @@ ess_1 <- ess %>%
                                      "Not at all interested"))) %>% 
   mutate(gndr = factor(gndr, levels = c(1,2), labels = c("Male", "Female"))) %>% 
   mutate(domicil = factor(domicil, levels = c(1:5), labels = c("1","2","3","4","5"))) %>%  
-  mutate(domicil = fct_collapse(domicil, Urban = c(1,2,3), Rural = c(4,5)))
+  mutate(domicil = fct_collapse(domicil, Urban = c(1,2,3), Rural = c(4,5))) %>% 
+  mutate(region = recode_factor(as.factor(region), 
+                                CH01 = "Lake Geneva",
+                                CH02 = "Middleland",
+                                CH03 = "North-West",
+                                CH04 = "Zurich",
+                                CH05 = "Eastern Part",
+                                CH06 = "Central Part",
+                                CH07 = "Ticino")) %>% 
+  mutate(eisced = factor(eisced, labels = c("ES-ISCED I",
+                                            "ES-ISCED II",
+                                            "ES-ISCED IIIb",
+                                            "ES-ISCED IIIa",
+                                            "ES-ISCED IV",
+                                            "ES-ISCED V1",
+                                            "ES-ISCED V2"))) %>% 
+  rename(educ = eisced)
 
 
 # Step 4: Inspect the new data set  ----
