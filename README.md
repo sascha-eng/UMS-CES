@@ -14,6 +14,6 @@ This project is carried out within the course **Data Mininig in R** at the Unive
 ## Project Structure
 ***
 This R Project is structured with folders for:  
-* **data**: all group memeber store the data (ESS10.csv) local in their data folder
+* **data**: all group memeber store the data (ESS10.csv) local in their data folder.
 * **scripts**: holds all the R scripts for the data manipulation.
-* **report**: contains the RMarkdown file
+* **output**: contains the RMarkdown report.
