@@ -14,8 +14,26 @@ knitr::opts_chunk$set(echo = TRUE)
 
 [tbd: what this work is about]
 
-```{r cars}
-summary(cars)
+```{r}
+library(tidyverse) # Load the tidyverse package
+
+ess_1 <- ess %>% 
+  select(idno, vote, polintr, gndr, agea, domicil, cntry, ctzcntr) %>%  # select variables
+  filter(cntry == "CH") %>%  # restrict sample to Switzerland
+  filter(ctzcntr == 1) %>% # restrict sample to Swiss citizens 
+  filter(vote %in% c(1,2)) %>%  # restrict to "yes" and "no" votes
+  filter(!polintr %in% c(7,8,9)) %>%  # exclude values 7, 8, and 9
+  filter(!agea %in% c(16,17,999)) %>% # exclude ages 16 and 17 and value 999
+  filter(!domicil %in% c(7,8,9)) %>%  # exclude values 7, 8, and 9
+  # Create factor variables 
+  mutate(vote = factor(vote, levels = c(1,2), labels = c("Yes","No"))) %>% 
+  mutate(polintr = factor(polintr, levels = c(1,2,3,4), 
+                          labels = c("Very interested",
+                                     "Quite interested",
+                                     "Hardly interested",
+                                     "Not at all interested"))) %>% 
+  mutate(gndr = factor(gndr, levels = c(1,2), labels = c("Male", "Female")))
+
 ```
 
 ## Methods
@@ -55,8 +73,15 @@ X-Variable:
   + 8	Don't know (missing value)
   + 9	No answer (missing value)
 
+```{r}
+# some summary statistics
+summary(ess_1)
+```
+
+
 ```{r pressure, echo=FALSE}
-plot(pressure)
+ggplot(data = ess_1) +
+  geom_jitter(mapping = aes(vote, polintr))
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
