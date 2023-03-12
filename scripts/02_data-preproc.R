@@ -20,11 +20,11 @@ ess_1 <- ess %>%
   filter(!domicil %in% c(7,8,9)) %>%  # exclude values 7, 8, and 9
   # Create factor variables 
   mutate(vote = factor(vote, levels = c(1,2), labels = c("Yes","No"))) %>% 
-  mutate(polintr = factor(polintr, levels = c(1,2,3,4), 
+  mutate(polintr = fct_rev(factor(polintr, ordered = TRUE, levels = c(1,2,3,4), # reverse the order of factor levels
                           labels = c("Very interested",
                                      "Quite interested",
                                      "Hardly interested",
-                                     "Not at all interested"))) %>% 
+                                     "Not at all interested")))) %>% 
   mutate(gndr = factor(gndr, levels = c(1,2), labels = c("Male", "Female"))) %>% 
   mutate(domicil = factor(domicil, levels = c(1:5), labels = c("1","2","3","4","5"))) %>%  
   mutate(domicil = fct_collapse(domicil, Urban = c(1,2,3), Rural = c(4,5))) %>% 
@@ -36,13 +36,13 @@ ess_1 <- ess %>%
                                 CH05 = "Eastern Part",
                                 CH06 = "Central Part",
                                 CH07 = "Ticino")) %>% 
-  mutate(eisced = factor(eisced, labels = c("ES-ISCED I",
-                                            "ES-ISCED II",
-                                            "ES-ISCED IIIb",
-                                            "ES-ISCED IIIa",
-                                            "ES-ISCED IV",
-                                            "ES-ISCED V1",
-                                            "ES-ISCED V2"))) %>% 
+  mutate(eisced = factor(eisced, ordered = TRUE, labels = c("ES-ISCED I",
+                                                            "ES-ISCED II",
+                                                            "ES-ISCED IIIb",
+                                                            "ES-ISCED IIIa",
+                                                            "ES-ISCED IV",
+                                                            "ES-ISCED V1",
+                                                            "ES-ISCED V2"))) %>% 
   rename(educ = eisced)
 
 
@@ -52,3 +52,5 @@ head(ess_1, 10)
 str(ess_1)
 summary(ess_1)
 View(ess_1)
+
+
