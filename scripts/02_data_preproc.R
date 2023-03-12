@@ -14,8 +14,9 @@ View(ess)
 library(tidyverse) # Load the tidyverse package
 
 ess_1 <- ess %>% 
-  select(vote, polintr, gndr, agea, domicil, cntry) %>%  # select variables
+  select(idno, vote, polintr, gndr, agea, domicil, cntry, ctzcntr) %>%  # select variables
   filter(cntry == "CH") %>%  # restrict sample to Switzerland
+  filter(ctzcntr == 1) %>% # restrict sample to Swiss citizens 
   filter(vote %in% c(1,2)) %>%  # restrict to "yes" and "no" votes
   filter(!polintr %in% c(7,8,9)) %>%  # exclude values 7, 8, and 9
   filter(!agea %in% c(16,17,999)) %>% # exclude ages 16 and 17 and value 999
