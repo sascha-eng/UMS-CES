@@ -22,7 +22,7 @@ ess_1 <- ess %>%
   filter(!domicil %in% c(7,8,9)) %>%  # exclude values 7, 8, and 9
   # Create factor variables  
   mutate(vote = factor(vote, levels = c(1,2), labels = c("Yes","No"))) %>%  # create binary factor 'vote' 
-  mutate(polintr = fct_rev(factor(polintr, ordered = TRUE, levels = c(1,2,3,4), # create ordered factor 'polintr' and reverse the order of factor levels by using fct_rev() 
+  mutate(polintr = fct_rev(factor(polintr, ordered = TRUE, levels = c(1,2,3,4), # create ordered factor 'polintr' and reverse order of factor levels using fct_rev() 
                                   labels = c("Very interested",
                                              "Quite interested",
                                              "Hardly interested",
@@ -54,3 +54,4 @@ head(ess_1, 10)
 str(ess_1) 
 summary(ess_1)
 View(ess_1)
+ 
