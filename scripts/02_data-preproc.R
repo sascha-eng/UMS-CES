@@ -12,7 +12,7 @@ View(ess)
 
 library(tidyverse) # Load the tidyverse package
 
-ess_1 <- ess %>% 
+ess_1 <- ess %>%  
   select(idno, vote, polintr, gndr, agea, domicil, region, eisced, cntry, ctzcntr) %>%  # select variables
   filter(cntry == "CH") %>%  # restrict sample to Switzerland
   filter(ctzcntr == 1) %>% # restrict sample to Swiss citizens 
@@ -21,7 +21,7 @@ ess_1 <- ess %>%
   filter(!agea %in% c(16,17,999)) %>% # exclude ages 16 and 17 and value 999
   filter(!domicil %in% c(7,8,9)) %>%  # exclude values 7, 8, and 9
   # Create factor variables  
-  mutate(vote = factor(vote, levels = c(1,2), labels = c("Yes","No"))) %>%  # create binary factor 'vote' 
+  mutate(vote = fct_rev(factor(vote, levels = c(1,2), labels = c("Yes","No")))) %>%  # create binary factor 'vote' and reverse order of factor levels using fct_rev() 
   mutate(polintr = fct_rev(factor(polintr, ordered = TRUE, levels = c(1,2,3,4), # create ordered factor 'polintr' and reverse order of factor levels using fct_rev() 
                                   labels = c("Very interested",
                                              "Quite interested",
