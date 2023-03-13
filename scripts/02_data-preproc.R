@@ -20,18 +20,17 @@ ess_1 <- ess %>%
   filter(!polintr %in% c(7,8,9)) %>%  # exclude values 7, 8, and 9
   filter(!agea %in% c(16,17,999)) %>% # exclude ages 16 and 17 and value 999
   filter(!domicil %in% c(7,8,9)) %>%  # exclude values 7, 8, and 9
-  # Create factor variables 
-  mutate(vote = factor(vote, levels = c(1,2), labels = c("Yes","No"))) %>% 
-  mutate(polintr = fct_rev(factor(polintr, ordered = TRUE, levels = c(1,2,3,4), # reverse the order of factor levels by using fct_rev() 
+  # Create factor variables  
+  mutate(vote = factor(vote, levels = c(1,2), labels = c("Yes","No"))) %>%  # create binary factor 'vote' 
+  mutate(polintr = fct_rev(factor(polintr, ordered = TRUE, levels = c(1,2,3,4), # create ordered factor 'polintr' and reverse the order of factor levels by using fct_rev() 
                                   labels = c("Very interested",
                                              "Quite interested",
                                              "Hardly interested",
                                              "Not at all interested")))) %>%
-  
-  mutate(gndr = factor(gndr, levels = c(1,2), labels = c("Male", "Female"))) %>% 
-  mutate(domicil = factor(domicil, levels = c(1:5), labels = c("1","2","3","4","5"))) %>%  
-  mutate(domicil = fct_collapse(domicil, Urban = c(1,2,3), Rural = c(4,5))) %>% 
-  mutate(region = recode_factor(as.factor(region), 
+  mutate(gndr = factor(gndr, levels = c(1,2), labels = c("Male", "Female"))) %>%  # create binary factor 'gndr'
+  mutate(domicil = factor(domicil, levels = c(1:5), labels = c("1","2","3","4","5"))) %>%  # create binary factor 'domicil'
+  mutate(domicil = fct_collapse(domicil, Urban = c(1,2,3), Rural = c(4,5))) %>%  # collaps categories
+  mutate(region = recode_factor(as.factor(region),  # create unordered factor 'region'
                                 CH01 = "Lake Geneva",
                                 CH02 = "Middleland",
                                 CH03 = "North-West",
@@ -39,7 +38,7 @@ ess_1 <- ess %>%
                                 CH05 = "Eastern Part",
                                 CH06 = "Central Part",
                                 CH07 = "Ticino")) %>% 
-  mutate(eisced = factor(eisced, ordered = TRUE, labels = c("ES-ISCED I",
+  mutate(eisced = factor(eisced, ordered = TRUE, labels = c("ES-ISCED I",  # create ordered factor 'educ'
                                                             "ES-ISCED II",
                                                             "ES-ISCED IIIb",
                                                             "ES-ISCED IIIa",
