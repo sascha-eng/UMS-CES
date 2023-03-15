@@ -2,4 +2,4 @@
 source(here::here("scripts", "02_data-preproc.R"))
 
 # save prepared data
-save(ess_1, here::here("data_prep", file = "ess_1.Rda"))
+save(ess_1, file = "ess_1.Rda")
