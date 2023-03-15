@@ -1,14 +1,14 @@
 ## Pre-process data
 
-# Step 1: Import data set 
-ess <- rio::import(here::here("data", "ESS10.csv"))
+# Step 1: Import data set ---- 
+source(here::here("scripts", "01_load-data.R"))
 
 
-# Step 2: Inspect data and make use of the ESS codebook 
+# Step 2: Inspect data and make use of the ESS codebook ----
 View(ess)
 
 
-# Step 3: Create new data set ess_1 for further analysis
+# Step 3: Create new data set ess_1 for further analysis ----
 
 library(tidyverse) # Load the tidyverse package
 
@@ -52,7 +52,7 @@ ess_1 <- ess %>%
   
 
 
-# Step 4: Inspect the new data set 
+# Step 4: Inspect the new data set ---- 
 
 head(ess_1, 10)
 str(ess_1) 
