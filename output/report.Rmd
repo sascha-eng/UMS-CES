@@ -17,6 +17,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(tidyverse) # Load the tidyverse package
 
+# import dataset
+ess <- rio::import(here::here("data", "ESS10.csv"))
+
 ess_1 <- ess %>% 
   select(idno, vote, polintr, gndr, agea, domicil, cntry, ctzcntr) %>%  # select variables
   filter(cntry == "CH") %>%  # restrict sample to Switzerland
@@ -24,7 +27,7 @@ ess_1 <- ess %>%
   filter(vote %in% c(1,2)) %>%  # restrict to "yes" and "no" votes
   filter(!polintr %in% c(7,8,9)) %>%  # exclude values 7, 8, and 9
   filter(!agea %in% c(16,17,999)) %>% # exclude ages 16 and 17 and value 999
-  filter(!domicil %in% c(7,8,9)) %>%  # exclude values 7, 8, and 9
+  filter(!domicil %in% c(7,8,9)) %>%   # exclude values 7, 8, and 9
   # Create factor variables 
   mutate(vote = factor(vote, levels = c(1,2), labels = c("Yes","No"))) %>% 
   mutate(polintr = factor(polintr, levels = c(1,2,3,4), 
