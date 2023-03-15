@@ -63,16 +63,18 @@ ess_1 <- ess %>%
 
 ## Methods
 
-Y-variable: 
-* `vote` - Voted last national election
-  + 1	Yes
-  + 2	No
-  + 3	Not eligible to vote
-  + 7	Refusal (missing value)
-  + 8	Don't know (missing value)
-  + 9	No answer (missing value)
+Y-variable:
+
+* `vote` - Voted last national election  
+  + 1	Yes  
+  + 2	No  
+  + 3	Not eligible to vote  
+  + 7	Refusal (missing value)  
+  + 8	Don't know (missing value)  
+  + 9	No answer (missing value)  
 
 X-Variable:
+
 * `polintr` - How interested in politics
   + 1	Very interested
   + 2	Quite interested
@@ -81,13 +83,16 @@ X-Variable:
   + 7	Refusal (missing value)
   + 8	Don't know (missing value)
   + 9	No answer (missing value)
+  
 * `gndr` - Gender
   + 1	Male
   + 2	Female
   + 9	No answer (missing value)
+  
 * `agea` - Age of respondent, calculated
   + age as numer
   + 999	Not available (missing value)
+  
 * `domicil` - Domicile, respondent's description
   + 1	A big city
   + 2	Suburbs or outskirts of big city
