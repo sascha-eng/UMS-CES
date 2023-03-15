@@ -57,8 +57,8 @@ ess_1 <- ess %>%
   rename(educ = eisced) %>% 
   mutate(age_group = factor(agea, ordered = TRUE, levels = c(18:90))) %>%  # create ordered factor 'age_group'
   mutate(age_group = fct_collapse(age_group, young = c(18:35), middle = c(36:55), older = c(56:90))) # collapse categories
-
-
+ 
+ 
 ```
 
 ## Methods
