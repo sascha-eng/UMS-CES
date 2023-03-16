@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-[tbd: what this work is about]
+How does age affect voting participation? The purpose of our project is to address this research question by investigating voting patterns by age group. We hypothesize that older adults are more likely to vote than young adults. To test our hypothesis, we use visualizations and apply a binary logit regression model on data from the European Social Survey (ESS) for a sample of 1,089 individuals surveyed in Switzerland in 2020. 
 
 ```{r}
 library(tidyverse) # Load the tidyverse package
