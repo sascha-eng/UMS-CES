@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-How does age affect voting participation? The purpose of our project is to address this research question by investigating voting patterns by age group. We hypothesize that older adults are more likely to vote than young adults. To test our hypothesis, we use visualizations and apply a binary logit regression model on data from the European Social Survey (ESS) for a sample of 1,089 individuals surveyed in Switzerland in 2020. 
+How does age affect voting participation? The purpose of our project is to address this research question by investigating voting patterns by age group. We hypothesize that older adults are more likely to vote than young adults. To test our hypothesis, we use visualizations and apply a binary logit regression model on data from the European Social Survey (ESS) for a sample of 1,089 individuals surveyed in Switzerland in 2020.
 
 ```{r}
 library(tidyverse) # Load the tidyverse package
@@ -20,23 +20,23 @@ library(tidyverse) # Load the tidyverse package
 # import dataset
 ess <- rio::import(here::here("data", "ESS10.csv"))
 
-ess_1 <- ess %>% 
+ess_1 <- ess %>%  
   select(idno, vote, polintr, gndr, agea, domicil, region, eisced, eduyrs, cntry, ctzcntr) %>%  # select variables
   filter(cntry == "CH") %>%  # restrict sample to Switzerland
   filter(ctzcntr == 1) %>% # restrict sample to Swiss citizens 
   filter(vote %in% c(1,2)) %>%  # restrict to "yes" and "no" votes
   filter(!polintr %in% c(7,8,9)) %>%  # exclude values 7, 8, and 9
   filter(!agea %in% c(16,17,999)) %>% # exclude ages 16 and 17 and value 999
-  filter(!domicil %in% c(7,8,9)) %>%   # exclude values 7, 8, and 9
+  filter(!domicil %in% c(7,8,9)) %>%  # exclude values 7, 8, and 9
   filter(eduyrs %in% c(5:21)) %>% # restrict sample to 5 to 21 years of education
-  # Create factor variables 
-  mutate(vote = factor(vote, levels = c(1,2), labels = c("Yes","No"))) %>% 
-  mutate(polintr = factor(polintr, levels = c(1,2,3,4), 
-                          labels = c("Very interested",
-                                     "Quite interested",
-                                     "Hardly interested",
-                                     "Not at all interested"))) %>% 
-  mutate(gndr = factor(gndr, levels = c(1,2), labels = c("Male", "Female"))) %>% # create binary factor 'gndr'
+  # Create factor variables  
+  mutate(vote = fct_rev(factor(vote, levels = c(1,2), labels = c("Yes","No")))) %>%  # create binary factor 'vote' and reverse order of factor levels using fct_rev() 
+  mutate(polintr = fct_rev(factor(polintr, ordered = TRUE, levels = c(1,2,3,4), # create ordered factor 'polintr' and reverse order of factor levels using fct_rev() 
+                                  labels = c("Very interested",
+                                             "Quite interested",
+                                             "Hardly interested",
+                                             "Not at all interested")))) %>%
+  mutate(gndr = factor(gndr, levels = c(1,2), labels = c("Male", "Female"))) %>%  # create binary factor 'gndr'
   mutate(domicil = factor(domicil, levels = c(1:5), labels = c("1","2","3","4","5"))) %>%  # create binary factor 'domicil'
   mutate(domicil = fct_collapse(domicil, Urban = c(1,2,3), Rural = c(4,5))) %>%  # collapse categories
   mutate(region = recode_factor(as.factor(region),  # create unordered factor 'region'
@@ -65,49 +65,45 @@ ess_1 <- ess %>%
 
 Y-variable:
 
-* `vote` - Voted last national election  
-  + 1	Yes  
-  + 2	No  
-  + 3	Not eligible to vote  
-  + 7	Refusal (missing value)  
-  + 8	Don't know (missing value)  
-  + 9	No answer (missing value)  
+-   `vote` - Voted last national election
+    -   1 Yes\
+    -   2 No\
+    -   3 Not eligible to vote\
+    -   7 Refusal (missing value)\
+    -   8 Don't know (missing value)\
+    -   9 No answer (missing value)
 
 X-Variable:
 
-* `polintr` - How interested in politics
-  + 1	Very interested
-  + 2	Quite interested
-  + 3	Hardly interested
-  + 4	Not at all interested
-  + 7	Refusal (missing value)
-  + 8	Don't know (missing value)
-  + 9	No answer (missing value)
-  
-* `gndr` - Gender
-  + 1	Male
-  + 2	Female
-  + 9	No answer (missing value)
-  
-* `agea` - Age of respondent, calculated
-  + age as numer
-  + 999	Not available (missing value)
-  
-* `domicil` - Domicile, respondent's description
-  + 1	A big city
-  + 2	Suburbs or outskirts of big city
-  + 3	Town or small city
-  + 4	Country village
-  + 5	Farm or home in countryside
-  + 7	Refusal (missing value)
-  + 8	Don't know (missing value)
-  + 9	No answer (missing value)
+-   `polintr` - How interested in politics
+    -   1 Very interested
+    -   2 Quite interested
+    -   3 Hardly interested
+    -   4 Not at all interested
+    -   7 Refusal (missing value)
+    -   8 Don't know (missing value)
+    -   9 No answer (missing value)
+-   `gndr` - Gender
+    -   1 Male
+    -   2 Female
+    -   9 No answer (missing value)
+-   `agea` - Age of respondent, calculated
+    -   age as numer
+    -   999 Not available (missing value)
+-   `domicil` - Domicile, respondent's description
+    -   1 A big city
+    -   2 Suburbs or outskirts of big city
+    -   3 Town or small city
+    -   4 Country village
+    -   5 Farm or home in countryside
+    -   7 Refusal (missing value)
+    -   8 Don't know (missing value)
+    -   9 No answer (missing value)
 
 ```{r}
 # some summary statistics
 summary(ess_1)
 ```
-
 
 ```{r pressure, echo=FALSE}
 ggplot(data = ess_1) +
@@ -116,6 +112,53 @@ ggplot(data = ess_1) +
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
+### Regression Analysis
+
+#### Binary Logit Regression
+The purpose of our project is to investigate the effect of age on voting participation. Because of the binary nature of the dependent variable vote, we apply a binary logit regression model to estimate the probability of voting given the main independent variable age_group and the control variables polintr, gndr, eduyrs, and region.
+
+```{r}
+## Regression Analysis
+
+# Step 1: Load packages
+library(stargazer)  # Displays regression results in a table
+library(mfx)  # Calculates marginal effects
+
+
+# Step 2: Set contrasts to handle ordered factors in the regression 
+options(contrasts = c("contr.treatment", "contr.treatment"))
+
+
+# Step 3: Run a binary logit regression 
+logitmodel <- glm(vote ~ age_group + polintr + gndr + eduyrs + region, family = binomial(link = "logit"), data = ess_1)
+
+
+# Step 4: Display the regression results 
+stargazer(logitmodel, type = "text")
+```
+
+#### Probability Changes
+It should be noted that the coefficients of the estimated binary logit regression model do not have direct interpretation except for the direction and significance of the effects. In order to interpret the coefficients, they need to be translated into something related to probabilities. Therefore, based on the estimated binary logit regression model, we calculate the probability changes for all variables in the model. 
+
+```{r}
+# Calculate the marginal effects for the logit regression 
+mfx <- logitmfx(logitmodel, atmean = TRUE, data = ess_1)
+mfx
+```
+
+
 ## Results
+
+### Regression Results
+
+#### Binary Logit Regression
+Focusing on the age group variable, the output of the logit regression model reports the coefficients for each but one category. Here, young adults was chosen by R as the base category. Thus, the results show that middle-aged and older adults are more likely to vote than young adults which is statistically significant at the 5% and 1% level, respectively. 
+
+#### Probability Changes
+Pointing to the age group variable, the results of the probability change calculation show that if we compare middle-aged adults (36-55) with the base category young adults (18-35), then middle-aged adults, on average, are 5.89 %-points more likely to vote than young adults, controlling for polintr, gndr, eduyrs, and region. Further, if we compare older adults (56+) with the base category young adults, then older adults, on average, are 21 %-points more likely to vote than young adults, controlling for polintr, gndr, eduyrs, and region. Again, both results are statistically significant.
+
+#### Conclusion
+
+Our analysis reveals that older and middle-aged adults are more likely to vote than young adults. Thus, we have confirmed our hypothesis. Given that the analysis is based on a observational data, the regression results must be interpreted descriptively, and not causally. Therefore, from our findings we conclude that the propensity to vote is associated with increases in age, keeping all other factors fixed.
 
 ## Discussion
