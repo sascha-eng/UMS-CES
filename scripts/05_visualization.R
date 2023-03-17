@@ -9,7 +9,7 @@ library(ggplot2)
 install.packages("visreg")
 library(visreg)
 
-#testing for "age_group"
+#testing for "age_group" ----
 
 visreg(logitmodel, "age_group",
        gg = TRUE,
@@ -21,7 +21,7 @@ visreg(logitmodel, "age_group",
        caption = "source: ESS10")
 ggsave(filename = file.path("output","age_group.png"))
 
-#testing for "eduyrs"
+#testing for "eduyrs" ----
 
 visreg(logitmodel, "eduyrs",
        gg = TRUE,
@@ -33,7 +33,7 @@ visreg(logitmodel, "eduyrs",
        caption = "source: ESS10")
 
 
-#testing for "polintr"
+#testing for "polintr" ----
 
 
 visreg(logitmodel, "polintr",
@@ -46,7 +46,7 @@ visreg(logitmodel, "polintr",
        caption = "source: ESS10")
 
 
-#testing for "region"
+#testing for "region" ----
 
 visreg(logitmodel, "region",
        gg = TRUE,
@@ -58,7 +58,7 @@ visreg(logitmodel, "region",
        caption = "source: ESS10")
 
 
-#testing for "gndr"
+#testing for "gndr" ----
 
 visreg(logitmodel, "gndr",
        gg = TRUE,
