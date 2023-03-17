@@ -9,9 +9,6 @@ library(ggplot2)
 install.packages("visreg")
 library(visreg)
 
-#load tidyverse
-library(tidyr)
-
 #testing for "age_group"
 
 visreg(logitmodel, "age_group",
