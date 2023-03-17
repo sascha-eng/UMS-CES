@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-How does age affect voting participation? The purpose of our project is to address this research question by investigating voting patterns by age group. We hypothesize that older adults are more likely to vote than young adults. To test our hypothesis, we use visualizations and apply a binary logit regression model on data from the European Social Survey (ESS) for a sample of 1,089 individuals surveyed in Switzerland in 2020.
+How does age affect voting participation? The purpose of our project is to address this research question by investigating voting patterns by age group. We hypothesize that older adults are more likely to vote than young adults. To test our hypothesis, we use visualizations and apply a binary logit regression model on data from the European Social Survey (ESS) for individuals surveyed in Switzerland.
 
 <br>
 
@@ -31,11 +31,11 @@ The relationship between age and voting is analysed using visualizations, descri
 
 The variables of interest for the analysis are defined as follows:
 
--   **Dependent variable**: *vote* is a binary variable which indicates whether or not the respondent voted in the last national election.
+* **Dependent variable**: `vote` is a binary variable which indicates whether or not the respondent voted in the last national election.
 
--   **Independent variable:** *age_group* is a categorical variable which indicates whether an individual belongs to the age group young adults (18-35), middle-aged adults (36-55), or older adults (55+).
+* **Independent variable:** `age_group` is a categorical variable which indicates whether an individual belongs to the age group young adults (18-35), middle-aged adults (36-55), or older adults (55+).
 
--   **Control variables:** a set of control variables is used in the regression models to account for confounding effects: *polintr* (categorical variable indicating individual level of interest in politics), *gndr* (binary variable indicating whether respondent is male or female), *eduyrs* (continuous variable measuring the years of education), and *region* (categorical variable indicating the region of residence).
+* **Control variables:** a set of control variables is used in the regression models to account for confounding effects: `polintr` (categorical variable indicating individual level of interest in politics), `gndr` (binary variable indicating whether respondent is male or female), `eduyrs` (continuous variable measuring the years of education), and `region` (categorical variable indicating the region of residence).
 
 <br>
 
@@ -103,7 +103,9 @@ summary(ess_1)
 
 <br>
 
-#### Visualisations
+### Visualisation
+
+To give an overall impression about voting participation by age, we created a scatterplot and added a bit of "noise".
 
 ```{r pressure, echo=FALSE}
 ggplot(data = ess_1) +
@@ -119,7 +121,7 @@ ggplot(data = ess_1) +
 
 #### Binary Logit Regression Model
 
-The purpose of our project is to investigate the effect of age on voting participation. Because of the binary nature of the dependent variable vote, we apply a binary logit regression model to estimate the probability of voting given the main independent variable *age_group* and the control variables *polintr*, *gndr*, *eduyrs*, and *region*.
+The purpose of our project is to investigate the effect of age on voting participation. Because of the binary nature of the dependent variable vote, we apply a binary logit regression model to estimate the probability of voting given the main independent variable `age_group` and the control variables `polintr`, `gndr`, `eduyrs`, and `region`.
 
 <br>
 
@@ -143,8 +145,6 @@ where:
 #### Regression Analysis
 
 ```{r, message = FALSE, warning = FALSE}
-
-## Regression Analysis
 
 # Step 1: Load packages
 library(stargazer)
