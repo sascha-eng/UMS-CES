@@ -28,7 +28,7 @@ visreg(logitmodel, "eduyrs",
        scale = "response") +
   labs(y = "Probability to Vote",
        x = "Age",
-       title = "Relationship of voting and age",
+       title = "Relationship of voting and years of education",
        subtitle = "controlling for political interest, gender, years of education and region",
        caption = "source: ESS10")
 
@@ -41,7 +41,7 @@ visreg(logitmodel, "polintr",
        scale = "response") +
   labs(y = "Probability to Vote",
        x = "Age",
-       title = "Relationship of voting and age",
+       title = "Relationship of voting and political interest",
        subtitle = "controlling for political interest, gender, years of education and region",
        caption = "source: ESS10")
 
@@ -53,7 +53,7 @@ visreg(logitmodel, "region",
        scale = "response") +
   labs(y = "Probability to Vote",
        x = "Age",
-       title = "Relationship of voting and age",
+       title = "Relationship of voting and region",
        subtitle = "controlling for political interest, gender, years of education and region",
        caption = "source: ESS10")
 
@@ -65,7 +65,7 @@ visreg(logitmodel, "gndr",
        scale = "response") +
   labs(y = "Probability to Vote",
        x = "Age",
-       title = "Relationship of voting and age",
+       title = "Relationship of voting and gender",
        subtitle = "controlling for political interest, gender, years of education and region",
        caption = "source: ESS10")
 
