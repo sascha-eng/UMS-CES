@@ -213,12 +213,10 @@ mfx
 Trying and searching various ways to visualize the results of the regression showed, that a probability based plot of the regression is promising. Depending on the state of R Studio first "ggplot2" and "visreg" need to be installed and loaded.
 
 ```{r}
-#install and load ggplot2
-install.packages("ggplot2")
+#load ggplot2
 library(ggplot2)
 
-#install and load visreg
-install.packages("visreg")
+#load visreg
 library(visreg)
 ```
 
