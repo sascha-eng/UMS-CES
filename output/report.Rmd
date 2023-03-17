@@ -249,7 +249,7 @@ visreg(logitmodel, "eduyrs",
        scale = "response") +
   labs(y = "Probability to Vote",
        x = "Age",
-       title = "Relationship of voting and age",
+       title = "Relationship of voting and years of education",
        subtitle = "controlling for political interest, gender, years of education and region",
        caption = "source: ESS10")
 
@@ -262,7 +262,7 @@ visreg(logitmodel, "polintr",
        scale = "response") +
   labs(y = "Probability to Vote",
        x = "Age",
-       title = "Relationship of voting and age",
+       title = "Relationship of voting and poitical interest",
        subtitle = "controlling for political interest, gender, years of education and region",
        caption = "source: ESS10")
 
@@ -274,7 +274,7 @@ visreg(logitmodel, "region",
        scale = "response") +
   labs(y = "Probability to Vote",
        x = "Age",
-       title = "Relationship of voting and age",
+       title = "Relationship of voting and region",
        subtitle = "controlling for political interest, gender, years of education and region",
        caption = "source: ESS10")
 
@@ -286,7 +286,7 @@ visreg(logitmodel, "gndr",
        scale = "response") +
   labs(y = "Probability to Vote",
        x = "Age",
-       title = "Relationship of voting and age",
+       title = "Relationship of voting and gender",
        subtitle = "controlling for political interest, gender, years of education and region",
        caption = "source: ESS10")
 ```
@@ -299,7 +299,5 @@ Our analysis reveals that older and middle-aged adults are more likely to vote t
 <br>
 
 ## Discussion
-expand analyse
-panel analysis
-comparative analysis between countries of similar 
-or reduce dataset
+We set out to see, how age does affect voting participation. We hypothesized that older adults are more likely to vote than young adults.The regression and the visualization confirms this suspicion. However we concede that this is a limited analysis which could be easily expanded.Staying within the confines of Switzerland a panel analysis over several years could be considered. Or expanding the scope of the analysis between various countries of similar economic and social power and structure.
+On the other hand, data set we use contains still some variables that go unused, so these could either be removed for a cleaner data set or added for further analysis of the subject.
