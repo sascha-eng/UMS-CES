@@ -1,4 +1,5 @@
 ##Create a visualization of the results
+#requires execution of script 01-04
 
 #install and load ggplot2
 install.packages("ggplot2")
@@ -25,6 +26,7 @@ visreg(logitmodel, "age_group",
        title = "Relationship of voting and age",
        subtitle = "controlling for political interest, gender, years of education and region",
        caption = "source: ESS10")
+ggsave(filename = file.path("output","age_group.png"))
 
 
 
