@@ -21,13 +21,13 @@ How does age affect voting participation? The purpose of our project is to addre
 
 ## Methods
 
-**Data and Methods**
+### Data and Methods
 
 The relationship between age and voting is analysed using visualizations, descriptive statistics and applying a binary logit regression model on survey data from the ESS Round 10 for the year 2020. The ESS data set contains the variables of interest and a reasonable number of observations which makes it suitable for the analysis. The final sample consists of 1,089 Swiss nationals surveyed in Switzerland, aged between 18 and 90 years with 5 to 21 years of education, and data on respondents' voting participation in the last national election, interest in politics and region of residence.
 
 <br>
 
-**Variables**
+### Variables
 
 The variables of interest for the analysis are defined as follows:
 
@@ -39,9 +39,9 @@ The variables of interest for the analysis are defined as follows:
 
 <br>
 
-**Data Preparation**
+### Data Preparation
 
-```{r, message = FALSE, warning = FALSE}
+```{r, message = FALSE, warning = FALSE, echo=FALSE}
 
 # Load the tidyverse package
 library(tidyverse) 
@@ -112,7 +112,6 @@ ggplot(data = ess_1) +
   geom_jitter(mapping = aes(vote, age_group))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 <br>
 
