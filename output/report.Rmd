@@ -39,8 +39,6 @@ The variables of interest for the analysis are defined as follows:
 
 <br>
 
-### Data Preparation
-
 ```{r, message = FALSE, warning = FALSE, echo=FALSE}
 
 # Load the tidyverse package
@@ -235,7 +233,7 @@ visreg(logitmodel, "age_group",
 The output shows the probability of the of the individual age groups to vote and the resulting plot can then be stored for future use or comparison.
 
 ```{r}
-ggsave(filename = file.path("output","age_group.png"))
+ggsave(filename = file.path("age_group.png"))
 ```
 
 Out of curiosity and to verify the code is working and the results fit the prediction of the regression, the code has been replicated for all combinations of variables.
