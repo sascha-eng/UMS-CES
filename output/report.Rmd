@@ -109,7 +109,7 @@ summary(ess_1)
 
 ```{r pressure, echo=FALSE}
 ggplot(data = ess_1) +
-  geom_jitter(mapping = aes(vote, polintr))
+  geom_jitter(mapping = aes(vote, age_group))
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
@@ -208,6 +208,92 @@ mfx
 
 <br>
 
+#### Visualization of the results
+
+Trying and searching various ways to visualize the results of the regression showed, that a probability based plot of the regression is promising. Depending on the state of R Studio first "ggplot2" and "visreg" need to be installed and loaded.
+
+```{r}
+#install and load ggplot2
+install.packages("ggplot2")
+library(ggplot2)
+
+#install and load visreg
+install.packages("visreg")
+library(visreg)
+```
+
+Taking the data prepared for the regression and stored in "logitmodel", it can now be visualized using "ggplot2". The scale follows the data used. Like in the regression, we're controlling for the political interest, gender, years of education and region.
+
+```{r}
+visreg(logitmodel, "age_group",
+       gg = TRUE,
+       scale = "response") +
+  labs(y = "Probability to Vote",
+       x = "Age Group",
+       title = "Relationship of voting and age",
+       subtitle = "controlling for political interest, gender, years of education and region",
+       caption = "source: ESS10")
+```
+
+The output shows the probability of the of the individual age groups to vote and the resulting plot can then be stored for future use or comparison.
+
+```{r}
+ggsave(filename = file.path("output","age_group.png"))
+```
+
+Out of curiosity and to verify the code is working and the results fit the prediction of the regression, the code has been replicated for all combinations of variables.
+
+```{r}
+#testing for "eduyrs"
+
+visreg(logitmodel, "eduyrs",
+       gg = TRUE,
+       scale = "response") +
+  labs(y = "Probability to Vote",
+       x = "Age",
+       title = "Relationship of voting and age",
+       subtitle = "controlling for political interest, gender, years of education and region",
+       caption = "source: ESS10")
+
+
+#testing for "polintr"
+
+
+visreg(logitmodel, "polintr",
+       gg = TRUE,
+       scale = "response") +
+  labs(y = "Probability to Vote",
+       x = "Age",
+       title = "Relationship of voting and age",
+       subtitle = "controlling for political interest, gender, years of education and region",
+       caption = "source: ESS10")
+
+
+#testing for "region"
+
+visreg(logitmodel, "region",
+       gg = TRUE,
+       scale = "response") +
+  labs(y = "Probability to Vote",
+       x = "Age",
+       title = "Relationship of voting and age",
+       subtitle = "controlling for political interest, gender, years of education and region",
+       caption = "source: ESS10")
+
+
+#testing for "gndr"
+
+visreg(logitmodel, "gndr",
+       gg = TRUE,
+       scale = "response") +
+  labs(y = "Probability to Vote",
+       x = "Age",
+       title = "Relationship of voting and age",
+       subtitle = "controlling for political interest, gender, years of education and region",
+       caption = "source: ESS10")
+```
+
+
 #### Conclusion
 
 Our analysis reveals that older and middle-aged adults are more likely to vote than young adults. Thus, we have confirmed our hypothesis. Given that the analysis is based on observational data, the regression results must be interpreted descriptively, and not causally. Therefore, we conclude from our findings that voting is associated with increases in age, keeping all other factors fixed.
@@ -215,3 +301,7 @@ Our analysis reveals that older and middle-aged adults are more likely to vote t
 <br>
 
 ## Discussion
+expand analyse
+panel analysis
+comparative analysis between countries of similar 
+or reduce dataset
